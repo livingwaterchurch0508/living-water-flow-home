@@ -24,8 +24,10 @@
       "sermon": "Watch Sermons",
       "soul": "Sermon Notes",
       "all": "All",
-      "principle": "Principle",
-      "lesson": "Lesson",
+      "introduce": "Introduce",
+      "mission": "Mission",
+      "spirit": "Spirit",
+      "heal": "Heal",
       "content": "You will immediately encounter your true self when you reflect on these words. \nHe always wins spiritual wars because he has a different purpose in life, a different value, a clear sense of mission, and a clear desire for heaven."
     },
     "Hymn": {
@@ -62,7 +64,9 @@
     "prev": "Prev",
     "next": "Next",
     "comingSoon": "It will be updated soon.",
-    "wait": "It will be updated as soon as possible.\nPlease wait a moment. Thank you."
+    "wait": "It will be updated as soon as possible.\nPlease wait a moment. Thank you.",
+    "detail": "Detail",
+    "close": "Close"
   },
   "Introduce": {
     "pastor": {

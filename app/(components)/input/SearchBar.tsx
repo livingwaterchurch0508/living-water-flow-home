@@ -55,11 +55,17 @@ export default function SearchBar({ menuTab }: ISearchBar) {
               <MenuItem onClick={() => setSoulType(SOUL_TYPE.ALL)}>
                 {t(SOUL_CATEGORY[SOUL_TYPE.ALL])}
               </MenuItem>
-              <MenuItem onClick={() => setSoulType(SOUL_TYPE.PRINCIPLE)}>
-                {t(SOUL_CATEGORY[SOUL_TYPE.PRINCIPLE])}
+              <MenuItem onClick={() => setSoulType(SOUL_TYPE.INTRODUCE)}>
+                {t(SOUL_CATEGORY[SOUL_TYPE.INTRODUCE])}
               </MenuItem>
-              <MenuItem onClick={() => setSoulType(SOUL_TYPE.LESSON)}>
-                {t(SOUL_CATEGORY[SOUL_TYPE.LESSON])}
+              <MenuItem onClick={() => setSoulType(SOUL_TYPE.MISSION)}>
+                {t(SOUL_CATEGORY[SOUL_TYPE.MISSION])}
+              </MenuItem>
+              <MenuItem onClick={() => setSoulType(SOUL_TYPE.SPIRIT)}>
+                {t(SOUL_CATEGORY[SOUL_TYPE.SPIRIT])}
+              </MenuItem>
+              <MenuItem onClick={() => setSoulType(SOUL_TYPE.HEAL)}>
+                {t(SOUL_CATEGORY[SOUL_TYPE.HEAL])}
               </MenuItem>
             </MenuList>
           </Menu>

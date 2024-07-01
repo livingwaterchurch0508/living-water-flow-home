@@ -21,6 +21,7 @@ import { getImageName } from "@/app/(util)/format/name-formatter";
 import { ICardItem, IMoveTab } from "@/app/(variables)/interfaces";
 import { MENU_TAB, SERMON_TAB, SOUL_TYPE } from "@/app/(variables)/enums";
 import { SOUL_CATEGORY } from "@/app/(variables)/constants";
+import DetailModalButton from "@/app/(components)/button/DetailModalButton";
 
 interface ICardGrid extends IMoveTab {
   list?: ICardItem[];
@@ -83,8 +84,10 @@ export default function CardGrid({
                 fontSize={{ sm: "xs", md: "2xs", base: "xs" }}
                 color={colorMode === "light" ? "midnightblue" : "white"}
               >
-                {(viewCount === SOUL_TYPE.LESSON ||
-                  viewCount === SOUL_TYPE.PRINCIPLE) &&
+                {(viewCount === SOUL_TYPE.MISSION ||
+                  viewCount === SOUL_TYPE.INTRODUCE ||
+                  viewCount === SOUL_TYPE.SPIRIT ||
+                  viewCount === SOUL_TYPE.HEAL) &&
                   t(SOUL_CATEGORY[viewCount])}
               </Text>
             )}
@@ -102,7 +105,16 @@ export default function CardGrid({
             >
               {title}
             </Text>
-            <Text fontSize={{ sm: "md", md: "xs", base: "md" }}>{content}</Text>
+            {!(
+              menuTab === MENU_TAB.SERMON && detailTab === SERMON_TAB.SOUL
+            ) && (
+              <Text fontSize={{ sm: "md", md: "xs", base: "md" }}>
+                {content}
+              </Text>
+            )}
+            {menuTab === MENU_TAB.SERMON && detailTab === SERMON_TAB.SOUL && (
+              <DetailModalButton name={title} desc={content} />
+            )}
             {!(
               menuTab === MENU_TAB.SERMON && detailTab === SERMON_TAB.SOUL
             ) && (

@@ -90,11 +90,15 @@ export enum INFO_TAB {
 
 /**
  * -1: 모두
- * 0: 영적 원리
- * 1: 영적 교훈
+ * 0: 교회 소개
+ * 1: 사명 전도
+ * 2: 영적 작용과 현상
+ * 3: 치유사역
  */
-export enum SOUL_TYPE {
+export const enum SOUL_TYPE {
   ALL = -1,
-  PRINCIPLE,
-  LESSON,
+  INTRODUCE,
+  MISSION,
+  SPIRIT,
+  HEAL,
 }
