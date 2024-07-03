@@ -39,11 +39,12 @@ export default function DetailModalButton({ name, desc }: IDetailModal) {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>
-            <Text mr={4}>{name}</Text>
-          </ModalHeader>
+          <ModalHeader></ModalHeader>
           <ModalCloseButton />
           <ModalBody>
+            <Text fontSize="xl" fontWeight="bold" mb={4}>
+              {name}
+            </Text>
             <Text>{desc}</Text>
           </ModalBody>
           <ModalFooter>
