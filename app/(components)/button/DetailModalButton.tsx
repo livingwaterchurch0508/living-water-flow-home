@@ -27,7 +27,7 @@ export default function DetailModalButton({ name, desc }: IDetailModal) {
 
   return (
     <>
-      <Button onClick={onOpen} size="sm" mt={4} colorScheme="teal">
+      <Button onClick={onOpen} size="sm" mt={4}>
         {t("detail")}
       </Button>
       <Modal
@@ -40,7 +40,7 @@ export default function DetailModalButton({ name, desc }: IDetailModal) {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>
-            <Text>{name}</Text>
+            <Text mr={4}>{name}</Text>
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
