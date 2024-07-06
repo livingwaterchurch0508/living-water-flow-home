@@ -33,7 +33,6 @@ import {
 } from "@/app/(variables)/enums";
 import { useMenuStore } from "@/app/(store)/menu-store";
 import { IMoveTab, ISermon } from "@/app/(variables)/interfaces";
-import { MdKeyboardArrowRight } from "react-icons/md";
 import DetailModal from "@/app/(components)/display/DetailModal";
 import { useDisclosure } from "@chakra-ui/hooks";
 
@@ -122,10 +121,7 @@ export default function MainSpirit() {
           }
         >
           <Link href={`/${locale}${ROUTER_PATHS[MENU_TAB.SERMON]}`}>
-            <HStack>
-              <Text fontSize="sm">{t("more")}</Text>
-              <MdKeyboardArrowRight />
-            </HStack>
+            <Text fontSize="sm">{t("more")}</Text>
           </Link>
         </Box>
       </HStack>

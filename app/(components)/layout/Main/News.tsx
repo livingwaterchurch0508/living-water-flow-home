@@ -10,7 +10,6 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { MdKeyboardArrowRight } from "react-icons/md";
 
 import { API_PATHS, ROUTER_PATHS } from "@/app/(variables)/constants";
 import { API_ROUTES, LOCALE_TYPE, MENU_TAB } from "@/app/(variables)/enums";
@@ -69,10 +68,7 @@ export default function MainNews() {
           {t("title")}
         </Text>
         <Link href={`/${locale}${ROUTER_PATHS[MENU_TAB.NEWS]}`}>
-          <HStack>
-            <Text fontSize="sm">{t("more")}</Text>
-            <MdKeyboardArrowRight />
-          </HStack>
+          <Text fontSize="sm">{t("more")}</Text>
         </Link>
       </HStack>
       <Grid templateColumns="1fr" gap={2} w="100%">
