@@ -10,16 +10,11 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { HiPlus } from "react-icons/hi";
+import { MdKeyboardArrowRight } from "react-icons/md";
 
 import { API_PATHS, ROUTER_PATHS } from "@/app/(variables)/constants";
-import {
-  API_ROUTES,
-  LOCALE_TYPE,
-  MENU_TAB,
-  NEWS_TAB,
-} from "@/app/(variables)/enums";
-import { communitiesFetcher, setMenuCookie } from "@/app/(util)/fetch/apis";
+import { API_ROUTES, LOCALE_TYPE, MENU_TAB } from "@/app/(variables)/enums";
+import { communitiesFetcher } from "@/app/(util)/fetch/apis";
 import { ICommunities } from "@/app/(util)/db/lib/communities";
 import { formattedDate } from "@/app/(util)/format/date-formatter";
 import useAbortableSWR from "@/app/(util)/hooks/useAbortableSWR";
@@ -33,10 +28,6 @@ export default function MainNews() {
       `${API_PATHS[API_ROUTES.GET_COMMUNITIES]}?page=1&limit=5`,
       communitiesFetcher,
     );
-
-  const MoveMenu = async () => {
-    await setMenuCookie({ menuTab: MENU_TAB.NEWS, detailTab: NEWS_TAB.NEWS });
-  };
 
   const displayCommunities = () => {
     if (communitiesData && communitiesData.payload) {
@@ -78,7 +69,10 @@ export default function MainNews() {
           {t("title")}
         </Text>
         <Link href={`/${locale}${ROUTER_PATHS[MENU_TAB.NEWS]}`}>
-          <HiPlus cursor="pointer" onClick={() => MoveMenu()} />
+          <HStack>
+            <Text fontSize="sm">{t("more")}</Text>
+            <MdKeyboardArrowRight />
+          </HStack>
         </Link>
       </HStack>
       <Grid templateColumns="1fr" gap={2} w="100%">

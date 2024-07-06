@@ -25,12 +25,14 @@ import DetailModalButton from "@/app/(components)/button/DetailModalButton";
 
 interface ICardGrid extends IMoveTab {
   list?: ICardItem[];
+  isMain?: boolean;
 }
 
 export default function CardGrid({
   list = [],
   menuTab,
   detailTab = 0,
+  isMain = false,
 }: ICardGrid) {
   const t = useTranslations("Menu.Sermon");
   const { colorMode } = useColorMode();
@@ -134,7 +136,7 @@ export default function CardGrid({
     );
   };
 
-  if (menuTab === MENU_TAB.SERMON && detailTab === SERMON_TAB.SOUL) {
+  if (menuTab === MENU_TAB.SERMON && detailTab === SERMON_TAB.SOUL && !isMain) {
     return (
       <Box w="90%" maxW="900px" sx={{ columnCount, columnGap: "1rem" }} mb={4}>
         {list.map((item, i) => (

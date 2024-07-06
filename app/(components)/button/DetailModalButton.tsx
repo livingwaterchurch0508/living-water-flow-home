@@ -1,57 +1,31 @@
 import { useDisclosure } from "@chakra-ui/hooks";
-import {
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-} from "@chakra-ui/modal";
-import { Button, Text, useBreakpointValue } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
+
+import DetailModal from "@/app/(components)/display/DetailModal";
 
 interface IDetailModal {
   name: string | null;
   desc: string | null;
+  mt?: number;
+  size?: string;
 }
 
-export default function DetailModalButton({ name, desc }: IDetailModal) {
+export default function DetailModalButton({
+  name,
+  desc,
+  mt = 4,
+  size = "sm",
+}: IDetailModal) {
   const t = useTranslations("Common");
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const columnCount = useBreakpointValue({
-    base: 1, // 모바일
-    md: 2, // 태블릿
-    lg: 3, // PC
-  });
 
   return (
     <>
-      <Button onClick={onOpen} size="sm" mt={4}>
+      <Button onClick={onOpen} size={size} mt={mt}>
         {t("detail")}
       </Button>
-      <Modal
-        isOpen={isOpen}
-        onClose={onClose}
-        size={columnCount === 1 ? "full" : "lg"}
-        scrollBehavior="inside"
-        motionPreset="slideInBottom"
-      >
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader></ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Text fontSize="xl" fontWeight="bold" mb={4}>
-              {name}
-            </Text>
-            <Text whiteSpace="pre-wrap">{desc}</Text>
-          </ModalBody>
-          <ModalFooter>
-            <Button onClick={onClose}>{t("close")}</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <DetailModal name={name} desc={desc} isOpen={isOpen} onClose={onClose} />
     </>
   );
 }

@@ -4,11 +4,16 @@
       "title": "Living Flow Water Church is",
       "description": "Let him see the light of Jesus.\nIt gets you out of the dark.\nIt opens your eyes by realizing the truth.\nIt fills you with wisdom and ability in life.\nIt allows you to have the power of faith so that you can only go to Jesus."
     },
+    "Spirit": {
+      "title": "Spirits",
+      "more": "more"
+    },
     "Sermon": {
       "title": "Sermons"
     },
     "News": {
-      "title": "News"
+      "title": "News",
+      "more": "more"
     }
   },
   "Menu": {
@@ -24,7 +29,7 @@
       "sermon": "Watch Sermons",
       "soul": "Sermon Notes",
       "all": "All",
-      "introduce": "Introduce",
+      "introduce": "Vision",
       "mission": "Mission",
       "spirit": "Spirit",
       "heal": "Heal",
