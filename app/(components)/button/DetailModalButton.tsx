@@ -45,7 +45,7 @@ export default function DetailModalButton({ name, desc }: IDetailModal) {
             <Text fontSize="xl" fontWeight="bold" mb={4}>
               {name}
             </Text>
-            <Text>{desc}</Text>
+            <Text whiteSpace="pre-wrap">{desc}</Text>
           </ModalBody>
           <ModalFooter>
             <Button onClick={onClose}>{t("close")}</Button>
