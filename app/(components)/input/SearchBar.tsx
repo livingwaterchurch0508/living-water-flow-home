@@ -23,18 +23,12 @@ import { useSelectMenu } from "@/app/(util)/hooks/useSelectMenu";
 import { MENU_TAB, SERMON_TAB, SOUL_TYPE } from "@/app/(variables)/enums";
 import { SOUL_CATEGORY } from "@/app/(variables)/constants";
 
-interface ISearchBar {
-  menuTab: MENU_TAB;
-}
-
-export default function SearchBar({ menuTab }: ISearchBar) {
+export default function SearchBar() {
   const t = useTranslations("Menu.Sermon");
   const { colorMode } = useColorMode();
 
   const { search, setSearch } = useSearchStore((state) => state);
-  const { detailTab } = useSelectMenu({
-    menuTab,
-  });
+  const { menuTab, detailTab } = useSelectMenu();
   const { soulType, setSoulType } = useSoulTypeStore((state) => state);
 
   return (

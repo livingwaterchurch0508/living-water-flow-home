@@ -9,19 +9,15 @@ import { useSelectMenu } from "@/app/(util)/hooks/useSelectMenu";
 import { MENU_TAB } from "@/app/(variables)/enums";
 
 interface ISwiperTabs {
-  menuTab: MENU_TAB;
   tabList?: string[];
   panelList?: React.ReactNode[];
 }
 
 export default function SwiperTabs({
-  menuTab,
   tabList = [],
   panelList = [],
 }: ISwiperTabs) {
-  const { detailTab, handleChange } = useSelectMenu({
-    menuTab,
-  });
+  const { menuTab, detailTab, handleChange } = useSelectMenu();
   const isSearchBar =
     menuTab !== MENU_TAB.INFO && menuTab !== MENU_TAB.INTRODUCE;
 
@@ -54,7 +50,7 @@ export default function SwiperTabs({
           <Tab key={`tab-${i + 1}`}>{tab}</Tab>
         ))}
       </TabList>
-      {isSearchBar && <SearchBar menuTab={menuTab} />}
+      {isSearchBar && <SearchBar />}
       <Swiper
         style={{ zIndex: 0 }}
         onSwiper={(swiper) => {

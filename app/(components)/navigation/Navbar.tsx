@@ -24,30 +24,17 @@ import Link from "next/link";
 
 import LocaleSwitcher from "@/app/(components)/button/LocaleSwitcher";
 import { Menus, ROUTER_PATHS } from "@/app/(variables)/constants";
-import { IMoveTab } from "@/app/(variables)/interfaces";
-import { setMenuCookie } from "@/app/(util)/fetch/apis";
-import { useMenuStore } from "@/app/(store)/menu-store";
+import { useSelectMenu } from "@/app/(util)/hooks/useSelectMenu";
 
 export default function Navbar() {
   const locale = useLocale();
   const t = useTranslations("Menu");
   const { colorMode, toggleColorMode } = useColorMode();
-  const { setMenuDetailTab } = useMenuStore((state) => state);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const { handleMenuChange } = useSelectMenu();
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  const MoveMenu = async ({ menuTab, detailTab }: IMoveTab) => {
-    await setMenuCookie({ menuTab, detailTab });
-    setMenuDetailTab({ menuTab, detailTab });
-  };
-
-  const handleMenuOpen = () => {
-    console.log("open");
-    setMenuOpen(true);
-  };
-
-  const handleMenuClose = () => {
-    console.log("close");
-    setMenuOpen(false);
+  const handleToggle = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
@@ -65,7 +52,7 @@ export default function Navbar() {
       zIndex={1}
     >
       <HStack alignItems="center">
-        <Menu onOpen={handleMenuOpen} onClose={handleMenuClose}>
+        <Menu>
           <MenuButton
             display={{ sm: "flex", md: "none", base: "flex" }}
             as={IconButton}
@@ -73,39 +60,38 @@ export default function Navbar() {
             icon={<RxHamburgerMenu />}
             bg="transparent"
           />
-          {menuOpen && (
-            <MenuList display={{ sm: "block", md: "none" }}>
-              <Accordion allowToggle>
-                {Menus(t).map((group, i) => (
-                  <AccordionItem
-                    borderTop="none"
-                    borderBottom="none"
-                    key={`menu-group-${i}`}
-                  >
-                    <AccordionButton>
-                      {group.name}
-                      <AccordionIcon />
-                    </AccordionButton>
-                    <AccordionPanel>
-                      {group.items.map((item, i) => (
-                        <MenuItem
-                          key={`menu-item-${i}`}
-                          onClick={() => MoveMenu({ ...item })}
+          <MenuList display={{ sm: "block", md: "none" }}>
+            <Accordion allowToggle>
+              {Menus(t).map((group, i) => (
+                <AccordionItem
+                  borderTop="none"
+                  borderBottom="none"
+                  key={`menu-group-${i}`}
+                  isFocusable={openIndex === i}
+                >
+                  <AccordionButton onClick={() => handleToggle(i)}>
+                    {group.name}
+                    <AccordionIcon />
+                  </AccordionButton>
+                  <AccordionPanel>
+                    {group.items.map((item, i) => (
+                      <MenuItem
+                        key={`menu-item-${i}`}
+                        onClick={() => handleMenuChange({ ...item })}
+                      >
+                        <Link
+                          href={`/${locale}${ROUTER_PATHS[item.menuTab]}`}
+                          style={{ width: "100%" }}
                         >
-                          <Link
-                            href={`/${locale}${ROUTER_PATHS[item.menuTab]}`}
-                            style={{ width: "100%" }}
-                          >
-                            <Text>{item.name}</Text>
-                          </Link>
-                        </MenuItem>
-                      ))}
-                    </AccordionPanel>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </MenuList>
-          )}
+                          <Text>{item.name}</Text>
+                        </Link>
+                      </MenuItem>
+                    ))}
+                  </AccordionPanel>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </MenuList>
         </Menu>
 
         <Link href={`/${locale}`}>
@@ -120,30 +106,24 @@ export default function Navbar() {
           display={{ sm: "none", md: "flex", base: "none" }}
         >
           {Menus(t).map((group, i) => (
-            <Menu
-              key={`menu--b-group-${i}`}
-              onOpen={handleMenuOpen}
-              onClose={handleMenuClose}
-            >
+            <Menu key={`menu--b-group-${i}`}>
               <MenuButton>{group.name}</MenuButton>
               <Portal>
-                {menuOpen && (
-                  <MenuList>
-                    {group.items.map((item, i) => (
-                      <MenuItem
-                        key={`menu-b-item-${i}`}
-                        onClick={() => MoveMenu({ ...item })}
+                <MenuList>
+                  {group.items.map((item, i) => (
+                    <MenuItem
+                      key={`menu-b-item-${i}`}
+                      onClick={() => handleMenuChange({ ...item })}
+                    >
+                      <Link
+                        href={`/${locale}${ROUTER_PATHS[item.menuTab]}`}
+                        style={{ width: "100%" }}
                       >
-                        <Link
-                          href={`/${locale}${ROUTER_PATHS[item.menuTab]}`}
-                          style={{ width: "100%" }}
-                        >
-                          <Text>{item.name}</Text>
-                        </Link>
-                      </MenuItem>
-                    ))}
-                  </MenuList>
-                )}
+                        <Text>{item.name}</Text>
+                      </Link>
+                    </MenuItem>
+                  ))}
+                </MenuList>
               </Portal>
             </Menu>
           ))}

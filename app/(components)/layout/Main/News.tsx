@@ -19,28 +19,22 @@ import {
   MENU_TAB,
   NEWS_TAB,
 } from "@/app/(variables)/enums";
-import { communitiesFetcher, setMenuCookie } from "@/app/(util)/fetch/apis";
+import { communitiesFetcher } from "@/app/(util)/fetch/apis";
 import { ICommunities } from "@/app/(util)/db/lib/communities";
 import { formattedDate } from "@/app/(util)/format/date-formatter";
 import useAbortableSWR from "@/app/(util)/hooks/useAbortableSWR";
-import { useMenuStore } from "@/app/(store)/menu-store";
-import { IMoveTab } from "@/app/(variables)/interfaces";
+import { useSelectMenu } from "@/app/(util)/hooks/useSelectMenu";
 
 export default function MainNews() {
   const t = useTranslations("Main.News");
   const locale = useLocale();
-  const { setMenuDetailTab } = useMenuStore((state) => state);
+  const { handleMenuChange } = useSelectMenu();
 
   const { data: communitiesData, isLoading: communitiesIsLoading } =
     useAbortableSWR(
       `${API_PATHS[API_ROUTES.GET_COMMUNITIES]}?page=1&limit=5`,
       communitiesFetcher,
     );
-
-  const MoveMenu = async ({ menuTab, detailTab }: IMoveTab) => {
-    await setMenuCookie({ menuTab, detailTab });
-    setMenuDetailTab({ menuTab, detailTab });
-  };
 
   const displayCommunities = () => {
     if (communitiesData && communitiesData.payload) {
@@ -83,7 +77,10 @@ export default function MainNews() {
         </Text>
         <Box
           onClick={() =>
-            MoveMenu({ menuTab: MENU_TAB.NEWS, detailTab: NEWS_TAB.NEWS })
+            handleMenuChange({
+              menuTab: MENU_TAB.NEWS,
+              detailTab: NEWS_TAB.NEWS,
+            })
           }
         >
           <Link href={`/${locale}${ROUTER_PATHS[MENU_TAB.NEWS]}`}>

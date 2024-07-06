@@ -6,14 +6,13 @@ import { Text, VStack } from "@chakra-ui/react";
 
 import Sermons from "@/app/(components)/layout/Sermons/Sermons";
 import SwiperTabs from "@/app/(components)/display/SwiperTabs";
-import { MENU_TAB, SERMON_TAB } from "@/app/(variables)/enums";
+import { SERMON_TAB } from "@/app/(variables)/enums";
 
 export default function SermonsPage() {
   const t = useTranslations("Menu.Sermon");
 
   return (
     <SwiperTabs
-      menuTab={MENU_TAB.SERMON}
       tabList={[t("sermon"), t("soul")]}
       panelList={[
         <Sermons key="rhema" type={SERMON_TAB.RHEMA} />,

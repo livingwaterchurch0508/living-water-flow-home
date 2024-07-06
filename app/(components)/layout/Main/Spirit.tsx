@@ -19,7 +19,7 @@ import { useDisclosure } from "@chakra-ui/hooks";
 
 import DetailModal from "@/app/(components)/display/DetailModal";
 import useAbortableSWR from "@/app/(util)/hooks/useAbortableSWR";
-import { sermonsFetcher, setMenuCookie } from "@/app/(util)/fetch/apis";
+import { sermonsFetcher } from "@/app/(util)/fetch/apis";
 import { ISermons } from "@/app/(util)/db/lib/sermons";
 import {
   API_PATHS,
@@ -33,8 +33,8 @@ import {
   SERMON_TAB,
   SOUL_TYPE,
 } from "@/app/(variables)/enums";
-import { IMoveTab, ISermon } from "@/app/(variables)/interfaces";
-import { useMenuStore } from "@/app/(store)/menu-store";
+import { ISermon } from "@/app/(variables)/interfaces";
+import { useSelectMenu } from "@/app/(util)/hooks/useSelectMenu";
 
 export default function MainSpirit() {
   const t = useTranslations("Main.Spirit");
@@ -43,12 +43,7 @@ export default function MainSpirit() {
   const { colorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [sermon, setSermon] = useState<ISermon>();
-  const { setMenuDetailTab } = useMenuStore((state) => state);
-
-  const MoveMenu = async ({ menuTab, detailTab }: IMoveTab) => {
-    await setMenuCookie({ menuTab, detailTab });
-    setMenuDetailTab({ menuTab, detailTab });
-  };
+  const { handleMenuChange } = useSelectMenu();
 
   const { data: sermonsData, isLoading: sermonsIsLoading } = useAbortableSWR(
     `${API_PATHS[API_ROUTES.GET_SERMONS]}?page=1&limit=4&type=1`,
@@ -117,7 +112,10 @@ export default function MainSpirit() {
         </Text>
         <Box
           onClick={() =>
-            MoveMenu({ menuTab: MENU_TAB.SERMON, detailTab: SERMON_TAB.SOUL })
+            handleMenuChange({
+              menuTab: MENU_TAB.SERMON,
+              detailTab: SERMON_TAB.SOUL,
+            })
           }
         >
           <Link href={`/${locale}${ROUTER_PATHS[MENU_TAB.SERMON]}`}>
