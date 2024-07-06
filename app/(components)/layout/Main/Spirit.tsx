@@ -84,7 +84,7 @@ export default function MainSpirit() {
                 <Text
                   fontSize={{ sm: "sm", md: "sm", base: "sm" }}
                   fontWeight="bold"
-                  color={colorMode === "light" ? "black" : "midnightblue"}
+                  color={colorMode === "light" ? "black" : "white"}
                   whiteSpace="pre-wrap"
                 >
                   {locale === LOCALE_TYPE.KO ? name : nameEn}
