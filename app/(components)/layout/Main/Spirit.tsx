@@ -15,7 +15,9 @@ import {
 } from "@chakra-ui/react";
 import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
+import { useDisclosure } from "@chakra-ui/hooks";
 
+import DetailModal from "@/app/(components)/display/DetailModal";
 import useAbortableSWR from "@/app/(util)/hooks/useAbortableSWR";
 import { sermonsFetcher, setMenuCookie } from "@/app/(util)/fetch/apis";
 import { ISermons } from "@/app/(util)/db/lib/sermons";
@@ -31,10 +33,8 @@ import {
   SERMON_TAB,
   SOUL_TYPE,
 } from "@/app/(variables)/enums";
-import { useMenuStore } from "@/app/(store)/menu-store";
 import { IMoveTab, ISermon } from "@/app/(variables)/interfaces";
-import DetailModal from "@/app/(components)/display/DetailModal";
-import { useDisclosure } from "@chakra-ui/hooks";
+import { useMenuStore } from "@/app/(store)/menu-store";
 
 export default function MainSpirit() {
   const t = useTranslations("Main.Spirit");
@@ -42,8 +42,8 @@ export default function MainSpirit() {
   const locale = useLocale();
   const { colorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { setMenuDetailTab } = useMenuStore((state) => state);
   const [sermon, setSermon] = useState<ISermon>();
+  const { setMenuDetailTab } = useMenuStore((state) => state);
 
   const MoveMenu = async ({ menuTab, detailTab }: IMoveTab) => {
     await setMenuCookie({ menuTab, detailTab });
