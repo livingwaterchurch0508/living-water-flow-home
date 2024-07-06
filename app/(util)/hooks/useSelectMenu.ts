@@ -25,9 +25,21 @@ export const useSelectMenu = () => {
 
   useEffect(() => {
     setSearch("");
-    getMenuCookie().then((cookieDetailTab) => {
-      if (detailTab !== cookieDetailTab)
-        setMenuDetailTab({ menuTab, detailTab });
+    getMenuCookie().then((data) => {
+      if (menuTab !== data["menuTab"]) {
+        setMenuDetailTab({
+          menuTab: data["menuTab"],
+          detailTab: data["detailTab"],
+        });
+        return;
+      }
+
+      if (detailTab !== data["detailTab"]) {
+        setMenuDetailTab({
+          menuTab: data["menuTab"],
+          detailTab,
+        });
+      }
     });
   }, []);
 

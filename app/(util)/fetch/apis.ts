@@ -34,7 +34,7 @@ export const getMenuCookie = async () => {
   try {
     const response = await fetch("/api/getCookie");
     const result = await response.json();
-    return result.data["detailTab"];
+    return result.data;
   } catch (error) {
     console.error("Failed to fetch cookie:", error);
   }

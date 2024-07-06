@@ -95,7 +95,7 @@ export enum INFO_TAB {
  * 2: 영적 작용과 현상
  * 3: 치유사역
  */
-export const enum SOUL_TYPE {
+export enum SOUL_TYPE {
   ALL = -1,
   INTRODUCE,
   MISSION,
