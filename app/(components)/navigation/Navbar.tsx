@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import {
   Accordion,
@@ -32,10 +33,21 @@ export default function Navbar() {
   const t = useTranslations("Menu");
   const { colorMode, toggleColorMode } = useColorMode();
   const { setMenuDetailTab } = useMenuStore((state) => state);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const MoveMenu = async ({ menuTab, detailTab }: IMoveTab) => {
     await setMenuCookie({ menuTab, detailTab });
     setMenuDetailTab({ menuTab, detailTab });
+  };
+
+  const handleMenuOpen = () => {
+    console.log("open");
+    setMenuOpen(true);
+  };
+
+  const handleMenuClose = () => {
+    console.log("close");
+    setMenuOpen(false);
   };
 
   return (
@@ -53,7 +65,7 @@ export default function Navbar() {
       zIndex={1}
     >
       <HStack alignItems="center">
-        <Menu>
+        <Menu onOpen={handleMenuOpen} onClose={handleMenuClose}>
           <MenuButton
             display={{ sm: "flex", md: "none", base: "flex" }}
             as={IconButton}
@@ -61,37 +73,39 @@ export default function Navbar() {
             icon={<RxHamburgerMenu />}
             bg="transparent"
           />
-          <MenuList display={{ sm: "block", md: "none" }}>
-            <Accordion allowToggle>
-              {Menus(t).map((group, i) => (
-                <AccordionItem
-                  borderTop="none"
-                  borderBottom="none"
-                  key={`menu-group-${i}`}
-                >
-                  <AccordionButton>
-                    {group.name}
-                    <AccordionIcon />
-                  </AccordionButton>
-                  <AccordionPanel>
-                    {group.items.map((item, i) => (
-                      <MenuItem
-                        key={`menu-item-${i}`}
-                        onClick={() => MoveMenu({ ...item })}
-                      >
-                        <Link
-                          href={`/${locale}${ROUTER_PATHS[item.menuTab]}`}
-                          style={{ width: "100%" }}
+          {menuOpen && (
+            <MenuList display={{ sm: "block", md: "none" }}>
+              <Accordion allowToggle>
+                {Menus(t).map((group, i) => (
+                  <AccordionItem
+                    borderTop="none"
+                    borderBottom="none"
+                    key={`menu-group-${i}`}
+                  >
+                    <AccordionButton>
+                      {group.name}
+                      <AccordionIcon />
+                    </AccordionButton>
+                    <AccordionPanel>
+                      {group.items.map((item, i) => (
+                        <MenuItem
+                          key={`menu-item-${i}`}
+                          onClick={() => MoveMenu({ ...item })}
                         >
-                          <Text>{item.name}</Text>
-                        </Link>
-                      </MenuItem>
-                    ))}
-                  </AccordionPanel>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </MenuList>
+                          <Link
+                            href={`/${locale}${ROUTER_PATHS[item.menuTab]}`}
+                            style={{ width: "100%" }}
+                          >
+                            <Text>{item.name}</Text>
+                          </Link>
+                        </MenuItem>
+                      ))}
+                    </AccordionPanel>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </MenuList>
+          )}
         </Menu>
 
         <Link href={`/${locale}`}>
@@ -106,24 +120,30 @@ export default function Navbar() {
           display={{ sm: "none", md: "flex", base: "none" }}
         >
           {Menus(t).map((group, i) => (
-            <Menu key={`menu--b-group-${i}`}>
+            <Menu
+              key={`menu--b-group-${i}`}
+              onOpen={handleMenuOpen}
+              onClose={handleMenuClose}
+            >
               <MenuButton>{group.name}</MenuButton>
               <Portal>
-                <MenuList>
-                  {group.items.map((item, i) => (
-                    <MenuItem
-                      key={`menu-b-item-${i}`}
-                      onClick={() => MoveMenu({ ...item })}
-                    >
-                      <Link
-                        href={`/${locale}${ROUTER_PATHS[item.menuTab]}`}
-                        style={{ width: "100%" }}
+                {menuOpen && (
+                  <MenuList>
+                    {group.items.map((item, i) => (
+                      <MenuItem
+                        key={`menu-b-item-${i}`}
+                        onClick={() => MoveMenu({ ...item })}
                       >
-                        <Text>{item.name}</Text>
-                      </Link>
-                    </MenuItem>
-                  ))}
-                </MenuList>
+                        <Link
+                          href={`/${locale}${ROUTER_PATHS[item.menuTab]}`}
+                          style={{ width: "100%" }}
+                        >
+                          <Text>{item.name}</Text>
+                        </Link>
+                      </MenuItem>
+                    ))}
+                  </MenuList>
+                )}
               </Portal>
             </Menu>
           ))}
