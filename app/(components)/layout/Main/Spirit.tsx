@@ -99,51 +99,73 @@ export default function MainSpirit() {
   };
 
   return (
-    <VStack alignItems="flex-start" w="90%" position="relative">
-      <HStack
-        justifyContent="space-between"
-        alignItems="center"
-        w="100%"
-        mb={2}
-      >
-        <Text fontSize={{ sm: "xl", md: "xl", base: "xl" }} fontWeight="bold">
-          {t("title")}
-        </Text>
-        <Box
-          onClick={() =>
-            handleMenuChange({
-              menuTab: MENU_TAB.SERMON,
-              detailTab: SERMON_TAB.SOUL,
-            })
-          }
+    <Box
+      w="97vw"
+      justifyContent="center"
+      display="flex"
+      py={10}
+      bg={colorMode === "light" ? "#f9fafb" : "rgba(45, 55, 72, 0.3)"}
+    >
+      <VStack w="90%" maxW="900px">
+        <VStack
+          alignItems="flex-start"
+          w="90%"
+          position="relative"
+          maxW="900px"
         >
-          <Link href={`/${locale}${ROUTER_PATHS[MENU_TAB.SERMON]}`}>
-            <Text fontSize="sm">{t("more")}</Text>
-          </Link>
-        </Box>
-      </HStack>
+          <HStack
+            justifyContent="space-between"
+            alignItems="center"
+            w="100%"
+            mb={2}
+          >
+            <Text
+              fontSize={{ sm: "xl", md: "xl", base: "xl" }}
+              fontWeight="bold"
+            >
+              {t("title")}
+            </Text>
+            <Box
+              onClick={() =>
+                handleMenuChange({
+                  menuTab: MENU_TAB.SERMON,
+                  detailTab: SERMON_TAB.SOUL,
+                })
+              }
+            >
+              <Link href={`/${locale}${ROUTER_PATHS[MENU_TAB.SERMON]}`}>
+                <Text fontSize="sm">{t("more")}</Text>
+              </Link>
+            </Box>
+          </HStack>
 
-      <Grid templateColumns="1fr 1fr" gap={2} w="100%">
-        {sermonsIsLoading
-          ? Array.from({ length: 4 }).map((_, i) => (
-              <GridItem key={i}>
-                <Skeleton height="120px" />
-              </GridItem>
-            ))
-          : displaySpirits()}
-      </Grid>
-      {isOpen && (
-        <DetailModal
-          name={
-            "" || locale === LOCALE_TYPE.KO ? sermon?.name! : sermon?.nameEn!
-          }
-          desc={
-            "" || locale === LOCALE_TYPE.KO ? sermon?.desc! : sermon?.descEn!
-          }
-          isOpen={isOpen}
-          onClose={onClose}
-        />
-      )}
-    </VStack>
+          <Grid templateColumns="1fr 1fr" gap={2} w="100%">
+            {sermonsIsLoading
+              ? Array.from({ length: 4 }).map((_, i) => (
+                  <GridItem key={i}>
+                    <Skeleton height="120px" />
+                  </GridItem>
+                ))
+              : displaySpirits()}
+          </Grid>
+          {isOpen && (
+            <DetailModal
+              name={
+                "" || locale === LOCALE_TYPE.KO
+                  ? sermon?.name!
+                  : sermon?.nameEn!
+              }
+              desc={
+                "" || locale === LOCALE_TYPE.KO
+                  ? sermon?.desc!
+                  : sermon?.descEn!
+              }
+              isOpen={isOpen}
+              onClose={onClose}
+            />
+          )}
+        </VStack>
+      </VStack>
+    </Box>
   );
 }

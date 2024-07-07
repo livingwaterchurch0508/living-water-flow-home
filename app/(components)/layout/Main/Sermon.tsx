@@ -1,12 +1,12 @@
 "use client";
 
+import React from "react";
 import {
   AspectRatio,
   Box,
   Grid,
   GridItem,
   HStack,
-  IconButton,
   Image,
   Skeleton,
   Text,
@@ -15,18 +15,28 @@ import {
 } from "@chakra-ui/react";
 import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
-import { FaYoutube } from "react-icons/fa6";
 
 import useAbortableSWR from "@/app/(util)/hooks/useAbortableSWR";
 import { sermonsFetcher } from "@/app/(util)/fetch/apis";
 import { ISermons } from "@/app/(util)/db/lib/sermons";
-import { API_PATHS, YOUTUBE_URL } from "@/app/(variables)/constants";
-import { API_ROUTES, LOCALE_TYPE } from "@/app/(variables)/enums";
+import {
+  API_PATHS,
+  ROUTER_PATHS,
+  YOUTUBE_URL,
+} from "@/app/(variables)/constants";
+import {
+  API_ROUTES,
+  LOCALE_TYPE,
+  MENU_TAB,
+  SERMON_TAB,
+} from "@/app/(variables)/enums";
+import { useSelectMenu } from "@/app/(util)/hooks/useSelectMenu";
 
 export default function MainSermon() {
   const t = useTranslations("Main.Sermon");
   const locale = useLocale();
   const { colorMode } = useColorMode();
+  const { handleMenuChange } = useSelectMenu();
 
   const { data: sermonsData, isLoading: sermonsIsLoading } = useAbortableSWR(
     `${API_PATHS[API_ROUTES.GET_SERMONS]}?page=1&limit=3`,
@@ -40,9 +50,7 @@ export default function MainSermon() {
         return payload.sermons.map((item, i) => (
           <GridItem key={i}>
             <Link
-              href={YOUTUBE_URL.VIEW + item.url}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={`/${locale}${ROUTER_PATHS[MENU_TAB.SERMON]}/${item.id}?type=${item.type}`}
             >
               <VStack overflow="hidden">
                 <AspectRatio ratio={4 / 3} style={{ scale: 1.2 }} w="100%">
@@ -76,30 +84,52 @@ export default function MainSermon() {
   };
 
   return (
-    <VStack alignItems="flex-start" w="90%" position="relative">
-      <HStack justifyContent="space-between" w="100%">
-        <Text fontSize={{ sm: "xl", md: "xl", base: "xl" }} fontWeight="bold">
-          {t("title")}
-        </Text>
-        <IconButton
-          as="a"
-          href={YOUTUBE_URL.CHANNEL}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="youtube"
-          icon={<FaYoutube style={{ color: "red" }} />}
-        />
-      </HStack>
+    <Box
+      w="97vw"
+      justifyContent="center"
+      display="flex"
+      py={10}
+      bg={colorMode === "light" ? "#f9fafb" : "rgba(45, 55, 72, 0.3)"}
+    >
+      <VStack w="90%" maxW="900px">
+        <VStack
+          alignItems="flex-start"
+          w="90%"
+          position="relative"
+          maxW="900px"
+        >
+          <HStack justifyContent="space-between" w="100%">
+            <Text
+              fontSize={{ sm: "xl", md: "xl", base: "xl" }}
+              fontWeight="bold"
+            >
+              {t("title")}
+            </Text>
+            <Box
+              onClick={() =>
+                handleMenuChange({
+                  menuTab: MENU_TAB.SERMON,
+                  detailTab: SERMON_TAB.RHEMA,
+                })
+              }
+            >
+              <Link href={`/${locale}${ROUTER_PATHS[MENU_TAB.SERMON]}`}>
+                <Text fontSize="sm">{t("more")}</Text>
+              </Link>
+            </Box>
+          </HStack>
 
-      <Grid templateColumns="repeat(3, 1fr)" gap="4px" w="100%">
-        {sermonsIsLoading
-          ? Array.from({ length: 3 }).map((_, i) => (
-              <GridItem key={i}>
-                <Skeleton height="200px" />
-              </GridItem>
-            ))
-          : displaySermons()}
-      </Grid>
-    </VStack>
+          <Grid templateColumns="repeat(3, 1fr)" gap="4px" w="100%">
+            {sermonsIsLoading
+              ? Array.from({ length: 3 }).map((_, i) => (
+                  <GridItem key={i}>
+                    <Skeleton height="200px" />
+                  </GridItem>
+                ))
+              : displaySermons()}
+          </Grid>
+        </VStack>
+      </VStack>
+    </Box>
   );
 }

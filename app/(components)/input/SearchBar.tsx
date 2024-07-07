@@ -32,25 +32,17 @@ export default function SearchBar() {
   return (
     <VStack my={4}>
       <VStack w="100%">
-        <InputGroup w="calc(90% - 28px)">
-          <InputLeftElement>
-            <BiSearch
-              style={{ color: colorMode === "light" ? "gray" : "white" }}
-            />
-          </InputLeftElement>
-          <Input value={search} onChange={(e) => setSearch(e.target.value)} />
-          <InputRightElement>
-            <AiOutlineCloseCircle
-              onClick={() => setSearch("")}
-              cursor="pointer"
-              style={{ color: colorMode === "light" ? "gray" : "white" }}
-            />
-          </InputRightElement>
-        </InputGroup>
         {menuTab === MENU_TAB.SERMON && detailTab === SERMON_TAB.SOUL && (
-          <Box overflowX="auto">
+          <Box
+            overflowX="auto"
+            sx={{
+              "&::-webkit-scrollbar": { display: "none" }, // Chrome, Safari, Opera
+              "-ms-overflow-style": "none", // IE and Edge
+              "scrollbar-width": "none", // Firefox
+            }}
+          >
             <Tabs variant="soft-rounded" size="sm">
-              <TabList display="flex" gap={2}>
+              <TabList display="flex">
                 <Tab
                   onClick={() => setSoulType(SOUL_TYPE.INTRODUCE)}
                   minW="fit-content"
@@ -72,6 +64,23 @@ export default function SearchBar() {
               </TabList>
             </Tabs>
           </Box>
+        )}
+        {menuTab === MENU_TAB.NEWS && (
+          <InputGroup w="calc(90% - 28px)">
+            <InputLeftElement>
+              <BiSearch
+                style={{ color: colorMode === "light" ? "gray" : "white" }}
+              />
+            </InputLeftElement>
+            <Input value={search} onChange={(e) => setSearch(e.target.value)} />
+            <InputRightElement>
+              <AiOutlineCloseCircle
+                onClick={() => setSearch("")}
+                cursor="pointer"
+                style={{ color: colorMode === "light" ? "gray" : "white" }}
+              />
+            </InputRightElement>
+          </InputGroup>
         )}
       </VStack>
     </VStack>

@@ -9,6 +9,7 @@ import {
   HStack,
   Skeleton,
   Text,
+  useColorMode,
   VStack,
 } from "@chakra-ui/react";
 
@@ -28,6 +29,7 @@ import { useSelectMenu } from "@/app/(util)/hooks/useSelectMenu";
 export default function MainNews() {
   const t = useTranslations("Main.News");
   const locale = useLocale();
+  const { colorMode } = useColorMode();
   const { handleMenuChange } = useSelectMenu();
 
   const { data: communitiesData, isLoading: communitiesIsLoading } =
@@ -65,38 +67,56 @@ export default function MainNews() {
   };
 
   return (
-    <VStack alignItems="flex-start" w="90%" position="relative">
-      <HStack
-        justifyContent="space-between"
-        alignItems="center"
-        w="100%"
-        mb={2}
-      >
-        <Text fontSize={{ sm: "xl", md: "xl", base: "xl" }} fontWeight="bold">
-          {t("title")}
-        </Text>
-        <Box
-          onClick={() =>
-            handleMenuChange({
-              menuTab: MENU_TAB.NEWS,
-              detailTab: NEWS_TAB.NEWS,
-            })
-          }
+    <Box
+      w="97vw"
+      justifyContent="center"
+      display="flex"
+      py={10}
+      bg={colorMode === "light" ? "#f9fafb" : "rgba(45, 55, 72, 0.3)"}
+    >
+      <VStack w="90%" maxW="900px">
+        <VStack
+          alignItems="flex-start"
+          w="90%"
+          position="relative"
+          maxW="900px"
         >
-          <Link href={`/${locale}${ROUTER_PATHS[MENU_TAB.NEWS]}`}>
-            <Text fontSize="sm">{t("more")}</Text>
-          </Link>
-        </Box>
-      </HStack>
-      <Grid templateColumns="1fr" gap={2} w="100%">
-        {communitiesIsLoading
-          ? Array.from({ length: 1 }).map((_, i) => (
-              <GridItem key={i}>
-                <Skeleton height="200px" />
-              </GridItem>
-            ))
-          : displayCommunities()}
-      </Grid>
-    </VStack>
+          <HStack
+            justifyContent="space-between"
+            alignItems="center"
+            w="100%"
+            mb={2}
+          >
+            <Text
+              fontSize={{ sm: "xl", md: "xl", base: "xl" }}
+              fontWeight="bold"
+            >
+              {t("title")}
+            </Text>
+            <Box
+              onClick={() =>
+                handleMenuChange({
+                  menuTab: MENU_TAB.NEWS,
+                  detailTab: NEWS_TAB.NEWS,
+                })
+              }
+            >
+              <Link href={`/${locale}${ROUTER_PATHS[MENU_TAB.NEWS]}`}>
+                <Text fontSize="sm">{t("more")}</Text>
+              </Link>
+            </Box>
+          </HStack>
+          <Grid templateColumns="1fr" gap={2} w="100%">
+            {communitiesIsLoading
+              ? Array.from({ length: 1 }).map((_, i) => (
+                  <GridItem key={i}>
+                    <Skeleton height="200px" />
+                  </GridItem>
+                ))
+              : displayCommunities()}
+          </Grid>
+        </VStack>
+      </VStack>
+    </Box>
   );
 }

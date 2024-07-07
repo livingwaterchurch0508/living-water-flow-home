@@ -11,8 +11,7 @@ export default function Footer() {
       alignItems="flex-start"
       position="relative"
       gap={0}
-      bg={colorMode === "light" ? "#F9FAFB" : "initial"}
-      mt={10}
+      bg={colorMode === "light" ? "#f2f4f6" : "initial"}
       py={4}
       px="8%"
     >

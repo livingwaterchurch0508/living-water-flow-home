@@ -23,8 +23,9 @@ import { FiMoon, FiSun } from "react-icons/fi";
 import Link from "next/link";
 
 import LocaleSwitcher from "@/app/(components)/button/LocaleSwitcher";
-import { Menus, ROUTER_PATHS } from "@/app/(variables)/constants";
+import { Menus, ROUTER_PATHS, YOUTUBE_URL } from "@/app/(variables)/constants";
 import { useSelectMenu } from "@/app/(util)/hooks/useSelectMenu";
+import { FaYoutube } from "react-icons/fa6";
 
 export default function Navbar() {
   const locale = useLocale();
@@ -128,14 +129,29 @@ export default function Navbar() {
             </Menu>
           ))}
         </HStack>
-        <HStack ml={4}>
+        <HStack ml={4} gap={0}>
+          <LocaleSwitcher />
           <IconButton
             aria-label="Toggle color mode"
             icon={colorMode === "light" ? <FiMoon /> : <FiSun />}
             onClick={toggleColorMode}
             bg="transparent"
           />
-          <LocaleSwitcher />
+          <IconButton
+            as="a"
+            href={YOUTUBE_URL.CHANNEL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="youtube"
+            icon={
+              <FaYoutube
+                style={{
+                  color: colorMode === "light" ? "#2c3e50" : "white",
+                }}
+              />
+            }
+            bg="transparent"
+          />
         </HStack>
       </HStack>
     </HStack>
