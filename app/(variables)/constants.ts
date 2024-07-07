@@ -34,11 +34,9 @@ export const YOUTUBE_URL = {
 };
 
 export const SOUL_CATEGORY = {
-  [SOUL_TYPE.ALL]: "all",
   [SOUL_TYPE.INTRODUCE]: "introduce",
   [SOUL_TYPE.MISSION]: "mission",
   [SOUL_TYPE.SPIRIT]: "spirit",
-  [SOUL_TYPE.HEAL]: "heal",
 };
 
 export const Menus = (t: any) => [

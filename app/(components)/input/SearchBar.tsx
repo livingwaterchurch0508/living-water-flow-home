@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Box,
-  HStack,
   Input,
   InputGroup,
   InputLeftElement,
@@ -32,17 +31,26 @@ export default function SearchBar() {
 
   return (
     <VStack my={4}>
-      {menuTab === MENU_TAB.SERMON && detailTab === SERMON_TAB.SOUL ? (
-        <VStack w="100%">
+      <VStack w="100%">
+        <InputGroup w="calc(90% - 28px)">
+          <InputLeftElement>
+            <BiSearch
+              style={{ color: colorMode === "light" ? "gray" : "white" }}
+            />
+          </InputLeftElement>
+          <Input value={search} onChange={(e) => setSearch(e.target.value)} />
+          <InputRightElement>
+            <AiOutlineCloseCircle
+              onClick={() => setSearch("")}
+              cursor="pointer"
+              style={{ color: colorMode === "light" ? "gray" : "white" }}
+            />
+          </InputRightElement>
+        </InputGroup>
+        {menuTab === MENU_TAB.SERMON && detailTab === SERMON_TAB.SOUL && (
           <Box overflowX="auto">
             <Tabs variant="soft-rounded" size="sm">
               <TabList display="flex" gap={2}>
-                <Tab
-                  onClick={() => setSoulType(SOUL_TYPE.ALL)}
-                  minW="fit-content"
-                >
-                  {t(SOUL_CATEGORY[SOUL_TYPE.ALL])}
-                </Tab>
                 <Tab
                   onClick={() => setSoulType(SOUL_TYPE.INTRODUCE)}
                   minW="fit-content"
@@ -61,53 +69,11 @@ export default function SearchBar() {
                 >
                   {t(SOUL_CATEGORY[SOUL_TYPE.SPIRIT])}
                 </Tab>
-                <Tab
-                  onClick={() => setSoulType(SOUL_TYPE.HEAL)}
-                  minW="fit-content"
-                >
-                  {t(SOUL_CATEGORY[SOUL_TYPE.HEAL])}
-                </Tab>
               </TabList>
             </Tabs>
           </Box>
-          <HStack w="calc(90% - 28px)">
-            <InputGroup>
-              <InputLeftElement>
-                <BiSearch
-                  style={{ color: colorMode === "light" ? "gray" : "white" }}
-                />
-              </InputLeftElement>
-              <Input
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-              <InputRightElement>
-                <AiOutlineCloseCircle
-                  onClick={() => setSearch("")}
-                  cursor="pointer"
-                  style={{ color: colorMode === "light" ? "gray" : "white" }}
-                />
-              </InputRightElement>
-            </InputGroup>
-          </HStack>
-        </VStack>
-      ) : (
-        <InputGroup w="calc(90% - 28px)">
-          <InputLeftElement>
-            <BiSearch
-              style={{ color: colorMode === "light" ? "gray" : "white" }}
-            />
-          </InputLeftElement>
-          <Input value={search} onChange={(e) => setSearch(e.target.value)} />
-          <InputRightElement>
-            <AiOutlineCloseCircle
-              onClick={() => setSearch("")}
-              cursor="pointer"
-              style={{ color: colorMode === "light" ? "gray" : "white" }}
-            />
-          </InputRightElement>
-        </InputGroup>
-      )}
+        )}
+      </VStack>
     </VStack>
   );
 }

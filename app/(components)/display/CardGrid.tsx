@@ -48,7 +48,7 @@ export default function CardGrid({
     id,
     image,
     title,
-    viewCount = SOUL_TYPE.ALL,
+    viewCount = SOUL_TYPE.INTRODUCE,
     youtube,
   }: ICardItem) => {
     return (
@@ -88,8 +88,7 @@ export default function CardGrid({
               >
                 {(viewCount === SOUL_TYPE.MISSION ||
                   viewCount === SOUL_TYPE.INTRODUCE ||
-                  viewCount === SOUL_TYPE.SPIRIT ||
-                  viewCount === SOUL_TYPE.HEAL) &&
+                  viewCount === SOUL_TYPE.SPIRIT) &&
                   t(SOUL_CATEGORY[viewCount])}
               </Text>
             )}

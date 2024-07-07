@@ -89,16 +89,12 @@ export enum INFO_TAB {
 }
 
 /**
- * -1: 모두
- * 0: 교회 소개
- * 1: 사명 전도
- * 2: 영적 작용과 현상
- * 3: 치유사역
+ * 0: 교회 비전
+ * 1: 영적 삶의 원리와 작용
+ * 2: 지혜로운 자의 삶
  */
 export enum SOUL_TYPE {
-  ALL = -1,
   INTRODUCE,
   MISSION,
   SPIRIT,
-  HEAL,
 }

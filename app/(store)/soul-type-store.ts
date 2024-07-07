@@ -7,7 +7,7 @@ interface SoulTypeState {
 }
 
 const useSoulTypeStore = create<SoulTypeState>((set) => ({
-  soulType: SOUL_TYPE.ALL,
+  soulType: SOUL_TYPE.INTRODUCE,
   setSoulType: (soulType) => set({ soulType }),
 }));
 

@@ -3,10 +3,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Box, Tab, TabList, Tabs } from "@chakra-ui/react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { usePathname } from "next/navigation";
 
 import SearchBar from "@/app/(components)/input/SearchBar";
 import { useSelectMenu } from "@/app/(util)/hooks/useSelectMenu";
 import { MENU_TAB } from "@/app/(variables)/enums";
+import { searchPath } from "@/app/(util)/search/search-util";
 
 interface ISwiperTabs {
   tabList?: string[];
@@ -17,9 +19,12 @@ export default function SwiperTabs({
   tabList = [],
   panelList = [],
 }: ISwiperTabs) {
-  const { menuTab, detailTab, handleChange } = useSelectMenu();
+  const pathname = usePathname();
+  const { detailTab, handleChange } = useSelectMenu();
+
   const isSearchBar =
-    menuTab !== MENU_TAB.INFO && menuTab !== MENU_TAB.INTRODUCE;
+    searchPath(pathname) !== MENU_TAB.INFO &&
+    searchPath(pathname) !== MENU_TAB.INTRODUCE;
 
   // Swiper 인스턴스를 참조할 ref 생성
   const swiperRef = useRef<any | null>(null);

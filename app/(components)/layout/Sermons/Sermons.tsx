@@ -19,7 +19,6 @@ import {
   LOCALE_TYPE,
   MENU_TAB,
   SERMON_TAB,
-  SOUL_TYPE,
 } from "@/app/(variables)/enums";
 
 interface ISermonsProps {
@@ -52,22 +51,14 @@ export default function Sermons({ type }: ISermonsProps) {
   useEffect(() => {
     if (+type === SERMON_TAB.SOUL) {
       setFilterSermons(
-        soulType === SOUL_TYPE.ALL
-          ? sermons.filter(
-              (sermon) =>
-                includeByCho(search, sermon.name) ||
-                includeByCho(search, sermon.nameEn) ||
-                includeByCho(search, sermon.desc) ||
-                includeByCho(search, sermon.name),
-            )
-          : sermons.filter(
-              (sermon) =>
-                (includeByCho(search, sermon.name) ||
-                  includeByCho(search, sermon.nameEn) ||
-                  includeByCho(search, sermon.desc) ||
-                  includeByCho(search, sermon.name)) &&
-                sermon.viewCount === soulType,
-            ),
+        sermons.filter(
+          (sermon) =>
+            (includeByCho(search, sermon.name) ||
+              includeByCho(search, sermon.nameEn) ||
+              includeByCho(search, sermon.desc) ||
+              includeByCho(search, sermon.name)) &&
+            sermon.viewCount === soulType,
+        ),
       );
       return;
     }

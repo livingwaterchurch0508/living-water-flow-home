@@ -1,3 +1,6 @@
+import { ROUTER_PATHS } from "@/app/(variables)/constants";
+import { MENU_TAB } from "@/app/(variables)/enums";
+
 const CHO_HANGUL = [
   "ㄱ",
   "ㄲ",
@@ -51,3 +54,12 @@ export function includeByCho(search = "", targetWord: string | null) {
 
   return makeRegexByCho(search).test(targetWord);
 }
+
+export const searchPath = (path: string) => {
+  for (const [key, value] of Object.entries(ROUTER_PATHS)) {
+    if (path.includes(value)) {
+      return +key;
+    }
+  }
+  return MENU_TAB.INTRODUCE;
+};

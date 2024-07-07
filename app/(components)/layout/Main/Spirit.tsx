@@ -77,8 +77,7 @@ export default function MainSpirit() {
                 >
                   {(viewCount === SOUL_TYPE.MISSION ||
                     viewCount === SOUL_TYPE.INTRODUCE ||
-                    viewCount === SOUL_TYPE.SPIRIT ||
-                    viewCount === SOUL_TYPE.HEAL) &&
+                    viewCount === SOUL_TYPE.SPIRIT) &&
                     menuT(SOUL_CATEGORY[viewCount])}
                 </Text>
                 <Text
