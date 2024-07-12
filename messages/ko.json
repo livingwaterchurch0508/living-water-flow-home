@@ -51,7 +51,17 @@
     },
     "Info": {
       "name": "안내",
-      "place": "교회 위치/주차"
+      "place": "교회 위치/주차",
+      "inquiry": "문의하기",
+      "needLogin": "문의하시려면 로그인이 필요합니다.",
+      "email": "이메일",
+      "kakao": "카카오 로그인",
+      "naver": "네이버 로그인",
+      "google": "구글 로그인",
+      "inquiryTitle": "문의제목",
+      "inquiryContent": "문의내용",
+      "secret": "비공개여부",
+      "close": "닫기"
     }
   },
   "Footer": {

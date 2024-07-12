@@ -30,6 +30,7 @@
     "framer-motion": "^11.1.7",
     "mysql2": "^3.9.7",
     "next": "14.2.2",
+    "next-auth": "^5.0.0-beta.19",
     "next-intl": "^3.14.1",
     "node-cache": "^5.1.2",
     "react": "^18",
@@ -51,5 +52,8 @@
     "eslint-config-next": "14.2.2",
     "prettier": "^3.2.5",
     "typescript": "^5"
+  },
+  "resolutions": {
+    "oauth4webapi": "npm:@jacobkim/oauth4webapi@^2.10.4"
   }
 }

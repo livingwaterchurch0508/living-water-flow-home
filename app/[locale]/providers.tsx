@@ -2,6 +2,8 @@
 
 import React from "react";
 import { ChakraProvider } from "@chakra-ui/react";
+import { SessionProvider } from "next-auth/react";
+
 import getTheme from "@/app/[locale]/theme";
 
 export function Providers({
@@ -13,5 +15,9 @@ export function Providers({
 }) {
   const theme = getTheme();
 
-  return <ChakraProvider theme={theme}>{children}</ChakraProvider>;
+  return (
+    <ChakraProvider theme={theme}>
+      <SessionProvider>{children}</SessionProvider>
+    </ChakraProvider>
+  );
 }

@@ -50,7 +50,17 @@
     },
     "Info": {
       "name": "Info",
-      "place": "Location"
+      "place": "Location",
+      "inquiry": "Inquiry",
+      "needLogin": "You will need to sign in to inquire.",
+      "email": "Email",
+      "kakao": "Login with Kakao",
+      "naver": "Login with Naver",
+      "google": "Login with Google",
+      "inquiryTitle": "Title",
+      "inquiryContent": "Message",
+      "secret": "Nondisclosure",
+      "close": "Close"
     }
   },
   "Footer": {

@@ -82,10 +82,11 @@ export enum NEWS_TAB {
 
 /**
  * 0: 교회 위치/주차
- * 1: 오시는 길
+ * 1: 문의하기
  */
 export enum INFO_TAB {
   LOCATION,
+  INQUIRY,
 }
 
 /**

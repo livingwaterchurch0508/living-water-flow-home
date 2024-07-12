@@ -118,6 +118,11 @@ export const Menus = (t: any) => [
         menuTab: MENU_TAB.INFO,
         detailTab: INFO_TAB.LOCATION,
       },
+      {
+        name: t("Info.inquiry"),
+        menuTab: MENU_TAB.INFO,
+        detailTab: INFO_TAB.INQUIRY,
+      },
     ],
   },
 ];
