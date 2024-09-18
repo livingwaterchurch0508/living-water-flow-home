@@ -29,6 +29,8 @@ export const useSelectMenu = () => {
   useEffect(() => {
     setSearch("");
     getMenuCookie().then((data) => {
+      if (!data) return;
+
       if (searchPath(pathname) !== data["menuTab"]) {
         setMenuDetailTab({
           menuTab: searchPath(pathname),

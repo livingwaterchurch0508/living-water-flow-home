@@ -3,15 +3,16 @@
 import useSWR from "swr";
 import { VStack } from "@chakra-ui/react";
 import { useSearchParams } from "next/navigation";
+import { useLocale } from "next-intl";
 
 import StorageImage from "@/app/(components)/media/StorageImage";
 import DetailCard from "@/app/(components)/display/DetailCard";
+import YoutubeEmbedCard from "@/app/(components)/display/YoutubeEmbedCard";
 import { communitiesFetcher } from "@/app/(util)/fetch/apis";
 import { ICommunitiesById } from "@/app/(util)/db/lib/communities";
 import { getImageName } from "@/app/(util)/format/name-formatter";
 import { API_PATHS } from "@/app/(variables)/constants";
 import { API_ROUTES, MENU_TAB } from "@/app/(variables)/enums";
-import { useLocale } from "next-intl";
 
 interface INewsPage {
   params: {
@@ -38,6 +39,27 @@ export default function NewsPage({ params: { id } }: INewsPage) {
       const item = payload.communities.find(
         (community) => community.id === +id,
       );
+
+      if (item?.url) {
+        return (
+          <DetailCard
+            isPrev={isPrev}
+            isNext={isNext}
+            findIdx={findIdx}
+            ids={payload.ids}
+            type={searchParams.get("type") || "0"}
+            menuTab={MENU_TAB.NEWS}
+            title={locale === "ko" ? item?.name : item?.nameEn}
+          >
+            {payload.communities.map((item, i) => (
+              <YoutubeEmbedCard
+                key={`sermon-${i}`}
+                youtubeId={item?.url || ""}
+              />
+            ))}
+          </DetailCard>
+        );
+      }
 
       return (
         <DetailCard

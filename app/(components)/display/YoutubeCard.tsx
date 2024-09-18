@@ -21,7 +21,7 @@ export default function YoutubeCard({
   const locale = useLocale();
   return (
     <VStack overflow="hidden" borderTopRadius={4}>
-      <AspectRatio w={w} ratio={24 / 14} style={{ scale: 1.1 }}>
+      <AspectRatio w={w} ratio={4 / 3} style={{ scale: 1.1 }}>
         <Link
           href={`/${locale}${ROUTER_PATHS[menuTab]}/${id}?type=${detailTab}`}
         >

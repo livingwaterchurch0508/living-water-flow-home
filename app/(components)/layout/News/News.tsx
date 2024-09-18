@@ -85,6 +85,7 @@ export default function News({ type }: INews) {
                   ? `${community.files[0].url}|${community.files[0].caption}`
                   : "",
               id: community.id,
+              youtube: community.url,
             }))}
             menuTab={MENU_TAB.NEWS}
             detailTab={+type}
