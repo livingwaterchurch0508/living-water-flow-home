@@ -18,7 +18,7 @@ import Link from "next/link";
 import { useDisclosure } from "@chakra-ui/hooks";
 
 import DetailModal from "@/app/(components)/display/DetailModal";
-import useAbortableSWR from "@/app/(util)/hooks/useAbortableSWR";
+import useAbortControllerSWR from "@/app/(util)/hooks/useAbortControllerSWR";
 import { sermonsFetcher } from "@/app/(util)/fetch/apis";
 import { ISermons } from "@/app/(util)/db/lib/sermons";
 import {
@@ -45,10 +45,11 @@ export default function MainSpirit() {
   const [sermon, setSermon] = useState<ISermon>();
   const { handleMenuChange } = useSelectMenu();
 
-  const { data: sermonsData, isLoading: sermonsIsLoading } = useAbortableSWR(
-    `${API_PATHS[API_ROUTES.GET_SERMONS]}?page=1&limit=4&type=1`,
-    sermonsFetcher,
-  );
+  const { data: sermonsData, isLoading: sermonsIsLoading } =
+    useAbortControllerSWR(
+      `${API_PATHS[API_ROUTES.GET_SERMONS]}?page=1&limit=4&type=1`,
+      sermonsFetcher,
+    );
 
   const DetailOpen = (sermon: ISermon) => {
     setSermon(sermon);

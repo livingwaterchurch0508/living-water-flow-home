@@ -18,7 +18,7 @@ import { ICommunities } from "@/app/(util)/db/lib/communities";
 import { useSearchStore } from "@/app/(store)/search-store";
 import { includeByCho } from "@/app/(util)/search/search-util";
 import { communitiesFetcher } from "@/app/(util)/fetch/apis";
-import useAbortableSWR from "@/app/(util)/hooks/useAbortableSWR";
+import useAbortControllerSWR from "@/app/(util)/hooks/useAbortControllerSWR";
 
 interface INews {
   type: NEWS_TYPES;
@@ -35,7 +35,7 @@ export default function News({ type }: INews) {
     ICommunities["communities"]
   >([]);
 
-  const { data, isLoading } = useAbortableSWR(
+  const { data, isLoading } = useAbortControllerSWR(
     `${API_PATHS[API_ROUTES.GET_COMMUNITIES]}?page=1&limit=1000&type=${type}`,
     communitiesFetcher,
     { revalidateOnFocus: false },

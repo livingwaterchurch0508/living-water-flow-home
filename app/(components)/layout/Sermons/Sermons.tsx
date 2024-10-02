@@ -12,7 +12,7 @@ import { ISermons } from "@/app/(util)/db/lib/sermons";
 import { useScrollRestoration } from "@/app/(util)/hooks/useScrollRestoration";
 import { includeByCho } from "@/app/(util)/search/search-util";
 import { sermonsFetcher } from "@/app/(util)/fetch/apis";
-import useAbortableSWR from "@/app/(util)/hooks/useAbortableSWR";
+import useAbortControllerSWR from "@/app/(util)/hooks/useAbortControllerSWR";
 import { API_PATHS } from "@/app/(variables)/constants";
 import {
   API_ROUTES,
@@ -33,7 +33,7 @@ export default function Sermons({ type }: ISermonsProps) {
   const [sermons, setSermons] = useState<ISermons["sermons"]>([]);
   const [filterSermons, setFilterSermons] = useState<ISermons["sermons"]>([]);
 
-  const { data, isLoading } = useAbortableSWR(
+  const { data, isLoading } = useAbortControllerSWR(
     `${API_PATHS[API_ROUTES.GET_SERMONS]}?page=1&limit=1000&type=${type}`,
     sermonsFetcher,
     { revalidateOnFocus: false },

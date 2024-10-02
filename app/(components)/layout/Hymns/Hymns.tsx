@@ -17,7 +17,7 @@ import { useScrollRestoration } from "@/app/(util)/hooks/useScrollRestoration";
 import { IHymns } from "@/app/(util)/db/lib/hymns";
 import { useSearchStore } from "@/app/(store)/search-store";
 import { includeByCho } from "@/app/(util)/search/search-util";
-import useAbortableSWR from "@/app/(util)/hooks/useAbortableSWR";
+import useAbortControllerSWR from "@/app/(util)/hooks/useAbortControllerSWR";
 import { hymnsFetcher } from "@/app/(util)/fetch/apis";
 
 interface IHymnsProps {
@@ -31,7 +31,7 @@ export default function Hymns({ type }: IHymnsProps) {
   const [hymns, setHymns] = useState<IHymns["hymns"]>([]);
   const [filterHymns, setFilterHymns] = useState<IHymns["hymns"]>([]);
 
-  const { data, isLoading } = useAbortableSWR(
+  const { data, isLoading } = useAbortControllerSWR(
     `${API_PATHS[API_ROUTES.GET_HYMNS]}?page=1&limit=1000&type=${type}`,
     hymnsFetcher,
     { revalidateOnFocus: false },

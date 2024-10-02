@@ -23,7 +23,7 @@ import {
 import { communitiesFetcher } from "@/app/(util)/fetch/apis";
 import { ICommunities } from "@/app/(util)/db/lib/communities";
 import { formattedDate } from "@/app/(util)/format/date-formatter";
-import useAbortableSWR from "@/app/(util)/hooks/useAbortableSWR";
+import useAbortControllerSWR from "@/app/(util)/hooks/useAbortControllerSWR";
 import { useSelectMenu } from "@/app/(util)/hooks/useSelectMenu";
 
 export default function MainNews() {
@@ -33,7 +33,7 @@ export default function MainNews() {
   const { handleMenuChange } = useSelectMenu();
 
   const { data: communitiesData, isLoading: communitiesIsLoading } =
-    useAbortableSWR(
+    useAbortControllerSWR(
       `${API_PATHS[API_ROUTES.GET_COMMUNITIES]}?page=1&limit=5`,
       communitiesFetcher,
     );
