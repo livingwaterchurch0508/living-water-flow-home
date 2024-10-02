@@ -20,7 +20,7 @@ export default function SwiperTabs({
   panelList = [],
 }: ISwiperTabs) {
   const pathname = usePathname();
-  const { detailTab, handleChange } = useSelectMenu();
+  const { menuTab, detailTab, handleChange } = useSelectMenu();
 
   const isSearchBar =
     searchPath(pathname) !== MENU_TAB.INFO &&
@@ -42,11 +42,36 @@ export default function SwiperTabs({
   };
 
   useEffect(() => {
-    if (swiperRef.current) {
-      swiperRef.current.slideTo(detailTab);
-      setActiveIndex(detailTab || 0);
+    const _setActiveIndex = () => {
+      if (swiperRef.current) {
+        swiperRef.current.slideTo(detailTab);
+        setActiveIndex(detailTab || 0);
+      }
+    };
+
+    switch (menuTab) {
+      case MENU_TAB.INTRODUCE:
+      case MENU_TAB.NEWS: {
+        if (tabList?.length === 3) {
+          _setActiveIndex();
+        }
+        return;
+      }
+      case MENU_TAB.HYMN:
+      case MENU_TAB.SERMON: {
+        if (tabList?.length === 2) {
+          _setActiveIndex();
+        }
+        return;
+      }
+      case MENU_TAB.INFO: {
+        if (tabList?.length === 1) {
+          _setActiveIndex();
+        }
+        return;
+      }
     }
-  }, [detailTab]);
+  }, [tabList?.length, detailTab, menuTab]);
 
   return (
     <Tabs index={detailTab} onChange={handleTabChange} isLazy>

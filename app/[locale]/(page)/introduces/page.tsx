@@ -6,8 +6,10 @@ import Church from "@/app/(components)/layout/Introduces/Church";
 import Pastor from "@/app/(components)/layout/Introduces/Pastor";
 import SwiperTabs from "@/app/(components)/display/SwiperTabs";
 import Worship from "@/app/(components)/layout/Introduces/Worship";
+import { useCookieSetMenu } from "@/app/(util)/hooks/useCookieSetMenu";
 
 export default function IntroducesPage() {
+  useCookieSetMenu();
   const t = useTranslations("Menu.Introduce");
 
   return (

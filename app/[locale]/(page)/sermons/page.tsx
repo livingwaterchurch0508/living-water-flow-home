@@ -7,8 +7,10 @@ import { Text, VStack } from "@chakra-ui/react";
 import Sermons from "@/app/(components)/layout/Sermons/Sermons";
 import SwiperTabs from "@/app/(components)/display/SwiperTabs";
 import { SERMON_TAB } from "@/app/(variables)/enums";
+import { useCookieSetMenu } from "@/app/(util)/hooks/useCookieSetMenu";
 
 export default function SermonsPage() {
+  useCookieSetMenu();
   const t = useTranslations("Menu.Sermon");
 
   return (

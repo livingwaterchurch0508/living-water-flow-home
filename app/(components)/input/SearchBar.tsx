@@ -37,8 +37,8 @@ export default function SearchBar() {
             overflowX="auto"
             sx={{
               "&::-webkit-scrollbar": { display: "none" }, // Chrome, Safari, Opera
-              "-ms-overflow-style": "none", // IE and Edge
-              "scrollbar-width": "none", // Firefox
+              msOverflowStyle: "none", // IE and Edge
+              scrollbarWidth: "none", // Firefox
             }}
           >
             <Tabs variant="soft-rounded" size="sm">

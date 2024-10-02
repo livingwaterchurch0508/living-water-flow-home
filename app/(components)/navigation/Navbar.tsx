@@ -68,7 +68,6 @@ export default function Navbar() {
                   borderTop="none"
                   borderBottom="none"
                   key={`menu-group-${i}`}
-                  isFocusable={openIndex === i}
                 >
                   <AccordionButton onClick={() => handleToggle(i)}>
                     {group.name}

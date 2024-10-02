@@ -7,8 +7,11 @@ import { Text, VStack } from "@chakra-ui/react";
 import Hymns from "@/app/(components)/layout/Hymns/Hymns";
 import SwiperTabs from "@/app/(components)/display/SwiperTabs";
 import { HYMN_TAB } from "@/app/(variables)/enums";
+import { useCookieSetMenu } from "@/app/(util)/hooks/useCookieSetMenu";
 
 export default function HymnsPage() {
+  useCookieSetMenu();
+
   const t = useTranslations("Menu.Hymn");
 
   return (
