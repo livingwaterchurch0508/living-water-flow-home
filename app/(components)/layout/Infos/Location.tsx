@@ -68,7 +68,7 @@ export default function Location() {
     } else {
       window.initMap = initMap;
     }
-  }, []);
+  }, [contentString]);
 
   return (
     <VStack mt={4}>

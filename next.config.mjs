@@ -7,6 +7,7 @@ const nextConfig = {
   env: {
     TZ: "Asia/Seoul",
   },
+  reactStrictMode: false,
 };
 
 export default withNextIntl(nextConfig);
