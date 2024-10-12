@@ -1,7 +1,7 @@
 import { MySql2Database } from "drizzle-orm/mysql2";
 import { and, desc, eq, inArray, sql } from "drizzle-orm";
 import { getDb } from "./dbConnection";
-import { communities, files } from "../schema";
+import { communities, files } from "./schema";
 import { NEWS_TAB, NEWS_TYPES } from "@/app/(variables)/enums";
 import { ICommunity, IError, IPage } from "@/app/(variables)/interfaces";
 

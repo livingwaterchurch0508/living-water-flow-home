@@ -21,7 +21,7 @@ import {
   NEWS_TAB,
 } from "@/app/(variables)/enums";
 import { communitiesFetcher } from "@/app/(util)/fetch/apis";
-import { ICommunities } from "@/app/(util)/db/lib/communities";
+import { ICommunities } from "@/app/(util)/db/mysql/communities";
 import { formattedDate } from "@/app/(util)/format/date-formatter";
 import useAbortControllerSWR from "@/app/(util)/hooks/useAbortControllerSWR";
 import { useSelectMenu } from "@/app/(util)/hooks/useSelectMenu";

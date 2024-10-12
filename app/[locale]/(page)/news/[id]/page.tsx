@@ -9,7 +9,7 @@ import StorageImage from "@/app/(components)/media/StorageImage";
 import DetailCard from "@/app/(components)/display/DetailCard";
 import YoutubeEmbedCard from "@/app/(components)/display/YoutubeEmbedCard";
 import { communitiesFetcher } from "@/app/(util)/fetch/apis";
-import { ICommunitiesById } from "@/app/(util)/db/lib/communities";
+import { ICommunitiesById } from "@/app/(util)/db/mysql/communities";
 import { getImageName } from "@/app/(util)/format/name-formatter";
 import { API_PATHS } from "@/app/(variables)/constants";
 import { API_ROUTES, MENU_TAB } from "@/app/(variables)/enums";

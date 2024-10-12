@@ -8,7 +8,7 @@ import CardGrid from "@/app/(components)/display/CardGrid";
 import SkeletonCardGrid from "@/app/(components)/display/SkeletonCardGrid";
 import { useSearchStore } from "@/app/(store)/search-store";
 import { useSoulTypeStore } from "@/app/(store)/soul-type-store";
-import { ISermons } from "@/app/(util)/db/lib/sermons";
+import { ISermons } from "@/app/(util)/db/mysql/sermons";
 import { useScrollRestoration } from "@/app/(util)/hooks/useScrollRestoration";
 import { includeByCho } from "@/app/(util)/search/search-util";
 import { sermonsFetcher } from "@/app/(util)/fetch/apis";

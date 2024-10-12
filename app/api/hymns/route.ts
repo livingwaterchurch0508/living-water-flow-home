@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { IHymnsType, getHymns } from "@/app/(util)/db/lib/hymns";
+import { IHymnsType, getHymns } from "@/app/(util)/db/sqlite/hymns";
 
 export const dynamic = "force-dynamic";
 

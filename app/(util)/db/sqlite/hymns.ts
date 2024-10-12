@@ -1,10 +1,9 @@
-import { MySql2Database } from "drizzle-orm/mysql2";
 import { desc, eq, sql } from "drizzle-orm";
 
-import { getDb } from "./dbConnection";
-import { hymns } from "../schema";
+import { hymns } from "./schema";
 import { IError, IHymn, IPage } from "@/app/(variables)/interfaces";
 import { HYMN_TAB } from "@/app/(variables)/enums";
+import { getDb } from "./dbConnection";
 
 export interface IHymns {
   total: number;
@@ -15,7 +14,7 @@ export interface IHymns {
 export type IHymnsType = Awaited<IError> | Awaited<IHymns> | null;
 
 export async function getHymns({ limit = 10, offset = 1, type = 0 }: IPage) {
-  const db: MySql2Database<Record<string, never>> | null = await getDb();
+  const db = await getDb();
 
   if (!db) return null;
 
@@ -51,7 +50,7 @@ export interface IHymnsById {
 export type IHymnType = Awaited<IError> | Awaited<IHymnsById> | null;
 
 export async function getHymnsById(id: number, type: HYMN_TAB) {
-  const db: MySql2Database<Record<string, never>> | null = await getDb();
+  const db = await getDb();
 
   if (!db) return null;
 

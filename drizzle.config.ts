@@ -1,18 +1,30 @@
-import type { Config } from "drizzle-kit";
+import { Config } from "drizzle-kit";
 import dotenv from "dotenv";
 
 dotenv.config({
   path: "./.env",
 });
 
+/** mysql */
+// export default {
+//   schema: "./util/db/schema.ts", // Path to your schema
+//   driver: "mysql2",
+//   dbCredentials: {
+//     user: process.env.DATABASE_USER,
+//     password: process.env.DATABASE_PASSWORD,
+//     host: process.env.DATABASE_HOST || "",
+//     port: Number(process.env.DATABASE_PORT),
+//     database: process.env.DATABASE_SCHEMA || "",
+//   },
+// } satisfies Config;
+
+/** sqlite */
 export default {
-  schema: "./util/db/schema.ts", // Path to your schema
-  driver: "mysql2",
+  out: "./drizzle",
+  schema: "./app/(util)/db/sqlite/schema.ts",
+  dialect: "turso",
   dbCredentials: {
-    user: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASSWORD,
-    host: process.env.DATABASE_HOST || "",
-    port: Number(process.env.DATABASE_PORT),
-    database: process.env.DATABASE_SCHEMA || "",
+    url: process.env.SQLITE_DATABASE_URL!,
+    authToken: process.env.SQLITE_DATABASE_AUTH_TOKEN,
   },
 } satisfies Config;

@@ -5,7 +5,7 @@ import useSWR from "swr";
 
 import YoutubeEmbedCard from "@/app/(components)/display/YoutubeEmbedCard";
 import DetailCard from "@/app/(components)/display/DetailCard";
-import { ISermonsById } from "@/app/(util)/db/lib/sermons";
+import { ISermonsById } from "@/app/(util)/db/mysql/sermons";
 import { sermonsFetcher } from "@/app/(util)/fetch/apis";
 import { API_PATHS } from "@/app/(variables)/constants";
 import { API_ROUTES, MENU_TAB } from "@/app/(variables)/enums";

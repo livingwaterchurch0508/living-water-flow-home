@@ -1,7 +1,7 @@
-import { MySql2Database } from "drizzle-orm/mysql2";
 import { desc, eq, sql } from "drizzle-orm";
+
 import { getDb } from "./dbConnection";
-import { sermons } from "../schema";
+import { sermons } from "./schema";
 import { IError, IPage, ISermon } from "@/app/(variables)/interfaces";
 import { SERMON_TAB } from "@/app/(variables)/enums";
 
@@ -14,7 +14,7 @@ export interface ISermons {
 export type ISermonsType = Awaited<IError> | Awaited<ISermons> | null;
 
 export async function getSermons({ limit = 10, offset = 1, type = 0 }: IPage) {
-  const db: MySql2Database<Record<string, never>> | null = await getDb();
+  const db = await getDb();
 
   if (!db) return null;
 
@@ -50,7 +50,7 @@ export interface ISermonsById {
 export type ISermonType = Awaited<IError> | Awaited<ISermonsById> | null;
 
 export async function getSermonsById(id: number, type: SERMON_TAB) {
-  const db: MySql2Database<Record<string, never>> | null = await getDb();
+  const db = await getDb();
 
   if (!db) return null;
 

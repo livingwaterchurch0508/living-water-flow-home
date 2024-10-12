@@ -14,7 +14,7 @@ import {
   NEWS_TYPES,
 } from "@/app/(variables)/enums";
 import { useScrollRestoration } from "@/app/(util)/hooks/useScrollRestoration";
-import { ICommunities } from "@/app/(util)/db/lib/communities";
+import { ICommunities } from "@/app/(util)/db/mysql/communities";
 import { useSearchStore } from "@/app/(store)/search-store";
 import { includeByCho } from "@/app/(util)/search/search-util";
 import { communitiesFetcher } from "@/app/(util)/fetch/apis";

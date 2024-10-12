@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSermons, ISermonsType } from "@/app/(util)/db/lib/sermons";
+import { getSermons, ISermonsType } from "@/app/(util)/db/sqlite/sermons";
 
 export const dynamic = "force-dynamic";
 

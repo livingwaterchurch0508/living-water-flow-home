@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import {
   getCommunitiesById,
   ICommunityType,
-} from "@/app/(util)/db/lib/communities";
+} from "@/app/(util)/db/sqlite/communities";
 
 export const dynamic = "force-dynamic";
 

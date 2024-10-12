@@ -6,7 +6,7 @@ import useSWR from "swr";
 import YoutubeEmbedCard from "@/app/(components)/display/YoutubeEmbedCard";
 import DetailCard from "@/app/(components)/display/DetailCard";
 import { hymnsFetcher } from "@/app/(util)/fetch/apis";
-import { IHymnsById } from "@/app/(util)/db/lib/hymns";
+import { IHymnsById } from "@/app/(util)/db/mysql/hymns";
 import { API_PATHS } from "@/app/(variables)/constants";
 import { API_ROUTES, MENU_TAB } from "@/app/(variables)/enums";
 import { useLocale } from "next-intl";

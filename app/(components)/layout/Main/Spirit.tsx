@@ -20,7 +20,7 @@ import { useDisclosure } from "@chakra-ui/hooks";
 import DetailModal from "@/app/(components)/display/DetailModal";
 import useAbortControllerSWR from "@/app/(util)/hooks/useAbortControllerSWR";
 import { sermonsFetcher } from "@/app/(util)/fetch/apis";
-import { ISermons } from "@/app/(util)/db/lib/sermons";
+import { ISermons } from "@/app/(util)/db/mysql/sermons";
 import {
   API_PATHS,
   ROUTER_PATHS,

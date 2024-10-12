@@ -14,7 +14,7 @@ import {
   MENU_TAB,
 } from "@/app/(variables)/enums";
 import { useScrollRestoration } from "@/app/(util)/hooks/useScrollRestoration";
-import { IHymns } from "@/app/(util)/db/lib/hymns";
+import { IHymns } from "@/app/(util)/db/mysql/hymns";
 import { useSearchStore } from "@/app/(store)/search-store";
 import { includeByCho } from "@/app/(util)/search/search-util";
 import useAbortControllerSWR from "@/app/(util)/hooks/useAbortControllerSWR";
