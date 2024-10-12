@@ -30,8 +30,7 @@ export const getDb = async (): Promise<MySql2Database<
     return null;
   }
   try {
-    const db = drizzle(connection.con);
-    return db;
+    return drizzle(connection.con);
   } catch (e) {
     return null;
   }
