@@ -6,7 +6,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-} from "@chakra-ui/modal";
+} from "@chakra-ui/react";
 import { Button, Text, useBreakpointValue } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 
