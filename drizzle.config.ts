@@ -18,13 +18,23 @@ dotenv.config({
 //   },
 // } satisfies Config;
 
+// /** sqlite turso */
+// export default {
+//   out: "./drizzle",
+//   schema: "./app/(util)/db/sqlite/schema.ts",
+//   dialect: "turso",
+//   dbCredentials: {
+//     url: process.env.SQLITE_DATABASE_URL!,
+//     authToken: process.env.SQLITE_DATABASE_AUTH_TOKEN,
+//   },
+// } satisfies Config;
+
 /** sqlite */
 export default {
   out: "./drizzle",
   schema: "./app/(util)/db/sqlite/schema.ts",
-  dialect: "turso",
+  dialect: "sqlite",
   dbCredentials: {
-    url: process.env.SQLITE_DATABASE_URL!,
-    authToken: process.env.SQLITE_DATABASE_AUTH_TOKEN,
+    url: process.env.DB_FILE_NAME!,
   },
 } satisfies Config;
