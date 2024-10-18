@@ -7,7 +7,10 @@ export const getDb = async () => {
     //   url: process.env.SQLITE_DATABASE_URL!,
     //   authToken: process.env.SQLITE_DATABASE_AUTH_TOKEN,
     // });
-    const client = createClient({ url: process.env.DB_FILE_NAME! });
+    const client = createClient({
+      url: process.env.DB_FILE_NAME!,
+      authToken: "",
+    });
 
     return drizzle(client);
   } catch (e) {
