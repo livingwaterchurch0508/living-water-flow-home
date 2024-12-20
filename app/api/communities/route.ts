@@ -4,8 +4,6 @@ import {
   ICommunitiesType,
 } from "@/app/(util)/db/sqlite/communities";
 
-export const dynamic = "force-dynamic";
-
 export async function GET(
   req: NextRequest,
 ): Promise<NextResponse<CommunitiesGetResponse>> {
