@@ -4,9 +4,11 @@ import useSWR from "swr";
 import { VStack } from "@chakra-ui/react";
 import { useSearchParams } from "next/navigation";
 import { useLocale } from "next-intl";
+import { PhotoProvider } from "react-photo-view";
+import "react-photo-view/dist/react-photo-view.css";
 
-import StorageImage from "@/app/(components)/media/StorageImage";
 import DetailCard from "@/app/(components)/display/DetailCard";
+import StorageArrayImage from "@/app/(components)/media/StorageArrayImage";
 import YoutubeEmbedCard from "@/app/(components)/display/YoutubeEmbedCard";
 import { communitiesFetcher } from "@/app/(util)/fetch/apis";
 import { ICommunitiesById } from "@/app/(util)/db/mysql/communities";
@@ -61,39 +63,35 @@ export default function NewsPage({ params: { id } }: INewsPage) {
         );
       }
 
+      const imageNames: string[] = [];
+      payload.communities[0].files.forEach((file) => {
+        if (!file.caption || !file.url) return <></>;
+        const count = +file?.caption || 1;
+
+        for (let i = 1; i < count + 1; i++) {
+          imageNames.push(getImageName(file.url, i));
+        }
+      });
+
       return (
-        <DetailCard
-          isPrev={isPrev}
-          isNext={isNext}
-          findIdx={findIdx}
-          ids={payload.ids}
-          type={searchParams.get("type") || "0"}
-          menuTab={MENU_TAB.NEWS}
-          title={locale === "ko" ? item?.name : item?.nameEn}
-        >
-          <VStack gap={4}>
-            {payload.communities.length > 0 &&
-              payload.communities[0].files.map((file) => {
-                const array = [];
-                if (file.caption === null) return <></>;
-                const count = +file?.caption || 1;
-
-                for (let i = 1; i < count + 1; i++) {
-                  if (file.url === null) return <></>;
-
-                  array.push(
-                    <StorageImage
-                      key={`image-${i}`}
-                      imageName={getImageName(file.url, i)}
-                      menuTab={MENU_TAB.NEWS}
-                    />,
-                  );
-                }
-
-                return array;
-              })}
-          </VStack>
-        </DetailCard>
+        <PhotoProvider>
+          <DetailCard
+            isPrev={isPrev}
+            isNext={isNext}
+            findIdx={findIdx}
+            ids={payload.ids}
+            type={searchParams.get("type") || "0"}
+            menuTab={MENU_TAB.NEWS}
+            title={locale === "ko" ? item?.name : item?.nameEn}
+          >
+            <VStack gap={4}>
+              <StorageArrayImage
+                imageNames={imageNames}
+                menuTab={MENU_TAB.NEWS}
+              />
+            </VStack>
+          </DetailCard>
+        </PhotoProvider>
       );
     }
 
