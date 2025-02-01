@@ -11,7 +11,7 @@ import {
 interface ICommon {
   id: number;
   url: string | null;
-  createdAt: string | null;
+  createdAt: Date | null;
 }
 
 interface IHymn extends ICommon {
@@ -43,7 +43,7 @@ export interface IError {
 export interface ICardItem {
   title: string | null;
   content: string | null;
-  createdAt: string | null;
+  createdAt: Date | null;
   image?: string | null;
   youtube?: string | null;
   viewCount?: number | null;

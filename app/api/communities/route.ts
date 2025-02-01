@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import {
   getCommunities,
   ICommunitiesType,
-} from "@/app/(util)/db/sqlite/communities";
+} from "@/app/(util)/db/mysql/communities";
 
 export async function GET(
   req: NextRequest,
