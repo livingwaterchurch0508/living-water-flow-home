@@ -6,17 +6,17 @@ dotenv.config({
 });
 
 /** mysql */
-export default {
-  dialect: "mysql",
-  schema: "./app/(util)/db/mysql/schema.ts", // Path to your schema
-  dbCredentials: {
-    user: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASSWORD,
-    host: process.env.DATABASE_HOST || "",
-    port: Number(process.env.DATABASE_PORT),
-    database: process.env.DATABASE_SCHEMA || "",
-  },
-} satisfies Config;
+// export default {
+//   dialect: "mysql",
+//   schema: "./app/(util)/db/mysql/schema.ts", // Path to your schema
+//   dbCredentials: {
+//     user: process.env.DATABASE_USER,
+//     password: process.env.DATABASE_PASSWORD,
+//     host: process.env.DATABASE_HOST || "",
+//     port: Number(process.env.DATABASE_PORT),
+//     database: process.env.DATABASE_SCHEMA || "",
+//   },
+// } satisfies Config;
 
 /** sqlite */
 // export default {
@@ -28,3 +28,13 @@ export default {
 //     authToken: process.env.SQLITE_DATABASE_AUTH_TOKEN,
 //   },
 // } satisfies Config;
+
+/** postgres */
+export default {
+  out: "./drizzle",
+  schema: "./app/(util)/db/postgres/schema.ts",
+  dialect: "postgresql",
+  dbCredentials: {
+    url: process.env.POSTGRES_URL!,
+  },
+} satisfies Config;

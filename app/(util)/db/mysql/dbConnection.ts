@@ -1,37 +1,43 @@
-import { MySql2Database, drizzle } from "drizzle-orm/mysql2";
+import { drizzle } from "drizzle-orm/mysql2";
 import mysql from "mysql2/promise";
 
-export const connection: { con: mysql.Connection | null } = { con: null };
+declare global {
+  var _mysqlPool: mysql.Pool | undefined;
+}
 
-//! RUNNED AT BUILD TIME
-try {
-  connection.con = await mysql.createConnection({
+let pool: mysql.Pool;
+
+if (!globalThis._mysqlPool) {
+  globalThis._mysqlPool = createNewPool();
+}
+
+pool = globalThis._mysqlPool;
+
+export const db = drizzle(pool);
+
+function createNewPool() {
+  return mysql.createPool({
     user: process.env.DATABASE_USER,
     password: process.env.DATABASE_PASSWORD,
     host: process.env.DATABASE_HOST,
     port: Number(process.env.DATABASE_PORT),
     database: process.env.DATABASE_SCHEMA,
     waitForConnections: true,
-    queueLimit: 10,
     connectionLimit: 10,
-    connectTimeout: 10000,
+    queueLimit: 0,
+    enableKeepAlive: true,
   });
-} catch (error) {
-  // eslint-disable-next-line no-console
-  console.warn("WARNING: Connection failed, read README.MD : \n ", error);
 }
 
-export const getDb = async (): Promise<MySql2Database<
-  Record<string, never>
-> | null> => {
-  if (!connection.con) {
-    // eslint-disable-next-line no-console
-    console.warn("WARNING: Connection failed, read README.MD.");
-    return null;
-  }
+export async function getDb() {
   try {
-    return drizzle(connection.con);
-  } catch (e) {
-    return null;
+    const connection = await pool.getConnection();
+    connection.release(); // 연결 테스트 후 해제
+    return db; // 🔹 풀 기반 Drizzle ORM 반환
+  } catch (error) {
+    console.error("MySQL connection failed, recreating pool...", error);
+    globalThis._mysqlPool = createNewPool(); // 🔹 새로운 연결 풀 생성
+    pool = globalThis._mysqlPool;
+    return db;
   }
-};
+}
