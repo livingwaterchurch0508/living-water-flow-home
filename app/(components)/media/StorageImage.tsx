@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Image } from "@chakra-ui/react";
 import Link from "next/link";
 import { useLocale } from "next-intl";
@@ -21,8 +21,34 @@ export default function StorageImage({
 }: ImageDisplayProps) {
   const locale = useLocale();
   const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const imgRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      {
+        root: null,
+        rootMargin: "100px",
+        threshold: 0.1,
+      },
+    );
+
+    if (imgRef.current) {
+      observer.observe(imgRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible || imageUrl) return;
+
     const fetchImageUrl = async () => {
       const response = await fetch(`/api/image?imageName=${imageName}`);
       const data = await response.blob();
@@ -31,10 +57,39 @@ export default function StorageImage({
     };
 
     fetchImageUrl();
-  }, [imageName]);
+
+    return () => {
+      if (imageUrl) {
+        URL.revokeObjectURL(imageUrl); // 메모리 정리
+      }
+    };
+  }, [isVisible, imageName]);
+
+  if (!isVisible) {
+    return (
+      <div
+        ref={imgRef}
+        style={{
+          width: "100%",
+          paddingBottom: "75%",
+          backgroundColor: "#e0e0e0",
+        }}
+      />
+    );
+  }
 
   if (!imageUrl) {
-    return <div>Loading...</div>;
+    return (
+      <div
+        style={{
+          width: "100%",
+          paddingBottom: "75%",
+          backgroundColor: "#e0e0e0",
+        }}
+      >
+        Loading...
+      </div>
+    );
   }
 
   if (id === -1) {
