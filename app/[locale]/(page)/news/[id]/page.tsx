@@ -57,6 +57,7 @@ export default function NewsPage({ params: { id } }: INewsPage) {
               <YoutubeEmbedCard
                 key={`sermon-${i}`}
                 youtubeId={item?.url || ""}
+                isAutoPlay={searchParams.get("autoplay") === "1"}
               />
             ))}
           </DetailCard>

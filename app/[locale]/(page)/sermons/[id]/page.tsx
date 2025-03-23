@@ -46,7 +46,11 @@ export default function SermonPage({ params: { id } }: ISermonPage) {
           title={locale === "ko" ? item?.name : item?.nameEn}
         >
           {payload.sermons.map((item, i) => (
-            <YoutubeEmbedCard key={`sermon-${i}`} youtubeId={item?.url || ""} />
+            <YoutubeEmbedCard
+              key={`sermon-${i}`}
+              youtubeId={item?.url || ""}
+              isAutoPlay={searchParams.get("autoplay") === "1"}
+            />
           ))}
         </DetailCard>
       );
