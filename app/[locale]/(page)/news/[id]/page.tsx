@@ -1,7 +1,7 @@
 "use client";
 
 import useSWR from "swr";
-import { VStack } from "@chakra-ui/react";
+import { Skeleton, VStack } from "@chakra-ui/react";
 import { useSearchParams } from "next/navigation";
 import { useLocale } from "next-intl";
 import { PhotoProvider } from "react-photo-view";
@@ -99,7 +99,12 @@ export default function NewsPage({ params: { id } }: INewsPage) {
     return null;
   };
 
-  if (isLoading) return <section>loading...</section>;
+  if (isLoading)
+    return (
+      <section>
+        <Skeleton w="100%" h="200px" />
+      </section>
+    );
 
   return <section>{data && data.payload && displayData()}</section>;
 }

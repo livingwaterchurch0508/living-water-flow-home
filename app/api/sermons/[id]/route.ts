@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSermonsById, ISermonType } from "@/app/(util)/db/mysql/sermons";
+import { getSermonsById, ISermonType } from "@/app/(util)/db/postgres/sermons";
 
 export const dynamic = "force-dynamic";
 

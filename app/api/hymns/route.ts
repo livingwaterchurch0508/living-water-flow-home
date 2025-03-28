@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getHymns, IHymnsType } from "@/app/(util)/db/mysql/hymns";
+import { getHymns, IHymnsType } from "@/app/(util)/db/postgres/hymns";
 
 export const dynamic = "force-dynamic";
 

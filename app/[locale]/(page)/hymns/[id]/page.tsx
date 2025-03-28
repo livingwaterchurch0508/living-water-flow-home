@@ -10,6 +10,7 @@ import { IHymnsById } from "@/app/(util)/db/mysql/hymns";
 import { API_PATHS } from "@/app/(variables)/constants";
 import { API_ROUTES, MENU_TAB } from "@/app/(variables)/enums";
 import { useLocale } from "next-intl";
+import { Skeleton } from "@chakra-ui/react";
 
 interface IHymnPage {
   params: {
@@ -59,7 +60,12 @@ export default function HymnPage({ params: { id } }: IHymnPage) {
     return null;
   };
 
-  if (isLoading) return <section>loading...</section>;
+  if (isLoading)
+    return (
+      <section>
+        <Skeleton w="100%" h="200px" />
+      </section>
+    );
 
   return <section>{data && data.payload && displayData()}</section>;
 }

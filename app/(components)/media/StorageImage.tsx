@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Image } from "@chakra-ui/react";
+import { Image, Skeleton } from "@chakra-ui/react";
 import Link from "next/link";
 import { useLocale } from "next-intl";
 
@@ -79,17 +79,7 @@ export default function StorageImage({
   }
 
   if (!imageUrl) {
-    return (
-      <div
-        style={{
-          width: "100%",
-          paddingBottom: "75%",
-          backgroundColor: "#e0e0e0",
-        }}
-      >
-        Loading...
-      </div>
-    );
+    return <Skeleton w="100%" h="200px" />;
   }
 
   if (id === -1) {

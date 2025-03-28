@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Image } from "@chakra-ui/react";
+import { Image, Skeleton } from "@chakra-ui/react";
 import { PhotoView } from "react-photo-view";
 
 import { IMoveTab } from "@/app/(variables)/interfaces";
@@ -35,7 +35,7 @@ export default function StorageArrayImage({ imageNames }: ImageDisplayProps) {
     <>
       {imageUrls.map((url, i) => {
         if (url === "") {
-          return <div key={`image-loading-${i}`}>Loading...</div>;
+          return <Skeleton key={`image-loading-${i}`} w="100%" h="200px" />;
         }
 
         return (

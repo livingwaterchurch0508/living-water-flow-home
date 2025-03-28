@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import {
   getCommunitiesById,
   ICommunityType,
-} from "@/app/(util)/db/mysql/communities";
+} from "@/app/(util)/db/postgres/communities";
 
 export async function GET(
   req: NextRequest,
